@@ -1,0 +1,20 @@
+//Implement a function that checks whether a given number is prime or not
+fn is_prime(n: u128) -> bool {
+    if n < 2 {
+        return false;
+    }
+
+    for i in 2..(n as f64).sqrt() as u128 + 1 {
+        if n % i == 0 {
+            return false;
+        }
+    }
+
+    true
+}
+
+fn main() {
+    let number = 17;
+    let result = is_prime(number);
+    println!("Is {} prime? {}", number, if result { "yes" } else { "no" });
+}
