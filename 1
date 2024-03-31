@@ -1,0 +1,19 @@
+//Implement a function that checks whether a given string is a palindrome or not.
+fn is_palindrome(s: &str) -> bool {
+    // Convert the string to lowercase
+    let s = s.to_lowercase();
+    // Iterate over the string and compare each character to its corresponding character in the reversed string
+    for (i, c) in s.chars().enumerate() {
+        if c!= s.chars().rev().nth(i).unwrap() {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    // Test the function with different inputs
+    println!("{}", is_palindrome("racecar")); // true
+    println!("{}", is_palindrome("hello"));   // false
+    println!("{}", is_palindrome("A man a plan a canal Panama"));  // true
+}
