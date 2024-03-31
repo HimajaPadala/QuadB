@@ -1,0 +1,18 @@
+//  Given a string of words, implement a function that returns the shortest word in the string.
+fn find_shortest_word(words: &str) -> &str {
+    let mut shortest: Option<&str> = None;
+
+    for word in words.split_whitespace() {
+        if shortest.is_none() || word.len() < shortest.unwrap().len() {
+            shortest = Some(word);
+        }
+    }
+
+    shortest.unwrap_or("")
+}
+
+fn main() {
+    let text = "I love Rust programming language";
+    let result = find_shortest_word(&text);
+    println!("The shortest word is: {}", result);
+}  
