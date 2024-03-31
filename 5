@@ -1,0 +1,17 @@
+//Given a sorted array of integers, implement a function that returns the median of the array
+fn median(arr: &[i32]) -> f64 {
+    let len = arr.len();
+    let mid = len / 2;
+
+    if len % 2 == 0 {
+        (arr[mid - 1] + arr[mid]) as f64 / 2.0
+    } else {
+        arr[mid] as f64
+    }
+}
+
+fn main() {
+    let numbers = vec![4, 8, 15, 16, 23, 42];
+    let result = median(&numbers);
+    println!("The median is: {}", result);
+}
