@@ -1,0 +1,23 @@
+//Implement a function that finds the longest common prefix of a given set of strings.
+fn longest_common_prefix(strs: &[&str]) -> &str {
+    if strs.is_empty() {
+        ""
+    } else {
+        let mut prefix = strs[0];
+        let len = strs.len();
+
+        for i in 1..len {
+            while!strs[i].starts_with(prefix) {
+                prefix = &prefix[..prefix.len() - 1];
+            }
+        }
+
+        prefix
+    }
+}
+
+fn main() {
+    let strings = vec!["flower", "flow", "flight"];
+    let result = longest_common_prefix(&strings);
+    println!("The longest common prefix is: {}", result);
+}
