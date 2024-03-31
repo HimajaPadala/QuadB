@@ -1,0 +1,40 @@
+//Given a binary tree, implement a function that returns the maximum depth of the tree
+use std::cell::Cell;
+
+#[derive(Debug, PartialEq, Eq)]
+struct TreeNode {
+    val: i32,
+    left: Option<Rc<RefCell<TreeNode>>>,
+    right: Option<Rc<RefCell<TreeNode>>>,
+}
+
+impl TreeNode {
+    fn new(val: i32) -> Self {
+        TreeNode {
+            val,
+            left: None,
+            right: None,
+        }
+    }
+}
+
+fn max_depth(root: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    match root {
+        None => 0,
+        Some(node) => {
+            let left_depth = max_depth(&node.borrow().left);
+            let right_depth = max_depth(&node.borrow().right);
+            1 + i32::max(left_depth, right_depth)
+        }
+    }
+}
+
+fn main() {
+    let root = Some(Rc::new(RefCell::new(TreeNode::new(1))));
+    root.as_ref().unwrap().borrow_mut().left = Some(Rc::new(RefCell::new(TreeNode::new(2))));
+    root.as_ref().unwrap().borrow_mut().right = Some(Rc::new(RefCell::new(TreeNode::new(3))));
+    root.as_ref().unwrap().borrow_mut().left.as_ref().unwrap().borrow_mut().left = Some(Rc::new(RefCell::new(TreeNode::new(4))));
+
+    let result = max_depth(&root);
+    println!("The maximum depth of the tree is: {}", result);
+}
